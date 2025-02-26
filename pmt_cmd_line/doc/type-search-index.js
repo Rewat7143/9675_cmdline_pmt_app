@@ -1,1 +1,0 @@
-typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"pmt_cmd_line","l":"BankAccount"},{"p":"pmt_cmd_line","l":"SourceTypes.SourceType"},{"p":"pmt_cmd_line","l":"SourceTypes"},{"p":"pmt_cmd_line","l":"TransactionDetails"},{"p":"pmt_cmd_line","l":"UserAccountDetails"},{"p":"pmt_cmd_line","l":"UserDetails"}];updateSearchResults();
