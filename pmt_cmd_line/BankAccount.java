@@ -1,19 +1,27 @@
 package pmt_cmd_line;
 
-public class BankAccount {
+class BankAccount {
 	
-	private String bankAccountId;
-	private String accountNumber;
-	private String ifscCode;
-	private String bankName;
-	private String branch;
-	private enum accountStatus{ACTIVE,INACTIVE,FROZEN,CLOSED;}
-	private UserDetails user;
-	public String getBankAccountId() {
+	private int bankAccountId;
+    private UserDetails user;
+    private String accountNumber;
+    private String ifscCode;
+    private String bankName;
+    private String bankAccountBranchLocation;
+    private boolean isActive;
+
+	
+    public int getBankAccountId() {
 		return bankAccountId;
 	}
-	public void setBankAccountId(String bankAccountId) {
+	public void setBankAccountId(int bankAccountId) {
 		this.bankAccountId = bankAccountId;
+	}
+	public UserDetails getUser() {
+		return user;
+	}
+	public void setUser(UserDetails user) {
+		this.user = user;
 	}
 	public String getAccountNumber() {
 		return accountNumber;
@@ -33,20 +41,17 @@ public class BankAccount {
 	public void setBankName(String bankName) {
 		this.bankName = bankName;
 	}
-	public String getBranch() {
-		return branch;
+	public String getBankAccountBranchLocation() {
+		return bankAccountBranchLocation;
 	}
-	public void setBranch(String branch) {
-		this.branch = branch;
+	public void setBankAccountBranchLocation(String bankAccountBranchLocation) {
+		this.bankAccountBranchLocation = bankAccountBranchLocation;
 	}
-	public UserDetails getUser() {
-		return user;
+	public boolean isActive() {
+		return isActive;
 	}
-	public void setUser(UserDetails user) {
-		this.user = user;
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
 	}
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 }
