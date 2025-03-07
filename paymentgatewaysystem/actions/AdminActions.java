@@ -35,7 +35,7 @@ public class AdminActions implements AdminActionsInter {
 	    } else {
 	        System.out.println("Admin View of User Details:");
 	        for (UserDetails user : AppData.getUsersList()) {
-	            System.out.println("Name: " + user.getUserName() + ", First Name: " + user.getFirstName() + 
+	            System.out.println("UserName: " + user.getUserName() + ", First Name: " + user.getFirstName() + 
 	                               ", Last Name: " + user.getLastName() +", Phone Number: " + user.getPhoneNumber() + 
 	                               ", Email: " + user.getEmail() + ", Address: " + user.getAddress());
 	        }
