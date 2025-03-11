@@ -21,16 +21,16 @@ public class RegistrationServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
+        PrintWriter writer = response.getWriter();
 
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
+        String user = request.getParameter("username");
+        String pass = request.getParameter("password");
 
-        out.println("<html><body>");
-        out.println("<h1>Registration Successful</h1>");
-        out.println("<p>Username: " + username + "</p>");
-        out.println("<p>Password: " + password + "</p>");
-        out.println("<a href='login'>Login</a>");
-        out.println("</body></html>");
+        writer.println("<html><body>");
+        writer.println("<h1>Account Created Successfully</h1>");
+        writer.println("<p>Username: " + user + "</p>");
+        writer.println("<p>Password: " + pass + "</p>");
+        writer.println("<a href='login'>Click here to Login</a>");
+        writer.println("</body></html>");
     }
 }
