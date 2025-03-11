@@ -7,7 +7,6 @@ public class Transaction {
     private int customerId;
     private String paymentMethod;
 
-    // Constructor, Getters, and Setters
     public Transaction(int transactionId, String transactionDate, double amount, int customerId, String paymentMethod) {
         this.transactionId = transactionId;
         this.transactionDate = transactionDate;
