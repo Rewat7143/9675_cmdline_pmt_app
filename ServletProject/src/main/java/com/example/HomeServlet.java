@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet("/home")
 public class HomeServlet extends HttpServlet {
-    private static final int LIMIT = 5; // Number of transactions per page
+    private static final int LIMIT = 5;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -33,7 +33,6 @@ public class HomeServlet extends HttpServlet {
             int totalTransactions = DatabaseUtil.getTotalTransactions();
             int totalPages = (int) Math.ceil((double) totalTransactions / LIMIT);
 
-            // Generate HTML for transactions
             out.println("<html><head><title>Home</title></head><body>");
             out.println("<h1>Transaction Details</h1>");
             out.println("<table border='1'><tr><th>ID</th><th>Date</th><th>Amount</th><th>Customer ID</th><th>Payment Method</th></tr>");
@@ -50,7 +49,6 @@ public class HomeServlet extends HttpServlet {
 
             out.println("</table>");
 
-            // Pagination links
             out.println("<div>");
             if (page > 1) {
                 out.println("<a href='home?page=" + (page - 1) + "'>Previous</a> ");
@@ -64,7 +62,7 @@ public class HomeServlet extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
             out.println("<h1>Error fetching transactions</h1>");
-            out.println("<p>Error: " + e.getMessage() + "</p>"); // Display the actual error message
+            out.println("<p>Error: " + e.getMessage() + "</p>");
         }
     }
 }
