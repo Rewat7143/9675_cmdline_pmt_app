@@ -13,15 +13,12 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Handle GET request (e.g., display the login form)
         response.sendRedirect("login.html");
-
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Handle POST request (e.g., process the login form)
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
 
