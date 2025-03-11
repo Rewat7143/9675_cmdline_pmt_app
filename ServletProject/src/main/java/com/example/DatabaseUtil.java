@@ -4,55 +4,56 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DatabaseUtil {
-    private static final String URL = "jdbc:mysql://localhost:3306/userdb"; 
-    private static final String USER = "root"; 
-    private static final String PASSWORD = "Mysql@123";
+public class DBUtils {
+
+    private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/userdb"; 
+    private static final String DB_USERNAME = "root"; 
+    private static final String DB_PASSWORD = "Mysql@123";
     
     static {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
-            throw new RuntimeException("Failed to load MySQL JDBC driver", e);
+            throw new RuntimeException("Could not load MySQL JDBC driver", e);
         }
     }
 
-    public static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(URL, USER, PASSWORD);
+    public static Connection connectToDatabase() throws SQLException {
+        return DriverManager.getConnection(DATABASE_URL, DB_USERNAME, DB_PASSWORD);
     }
 
-    public static List<Transaction> getTransactions(int offset, int limit) throws SQLException {
-        List<Transaction> transactions = new ArrayList<>();
-        String query = "SELECT * FROM transaction_table LIMIT ? OFFSET ?";
+    public static List<Transaction> fetchTransactions(int offset, int limit) throws SQLException {
+        List<Transaction> transactionsList = new ArrayList<>();
+        String sqlQuery = "SELECT * FROM transaction_table LIMIT ? OFFSET ?";
 
-        try (Connection conn = getConnection();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
-            stmt.setInt(1, limit);
-            stmt.setInt(2, offset);
+        try (Connection conn = connectToDatabase();
+             PreparedStatement preparedStmt = conn.prepareStatement(sqlQuery)) {
+            preparedStmt.setInt(1, limit);
+            preparedStmt.setInt(2, offset);
 
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
+            ResultSet resultSet = preparedStmt.executeQuery();
+            while (resultSet.next()) {
                 Transaction transaction = new Transaction(
-                    rs.getInt("transaction_id"),
-                    rs.getString("transaction_date"),
-                    rs.getDouble("amount"),
-                    rs.getInt("customer_id"),
-                    rs.getString("payment_method")
+                    resultSet.getInt("transaction_id"),
+                    resultSet.getString("transaction_date"),
+                    resultSet.getDouble("amount"),
+                    resultSet.getInt("customer_id"),
+                    resultSet.getString("payment_method")
                 );
-                transactions.add(transaction);
+                transactionsList.add(transaction);
             }
         }
-        return transactions;
+        return transactionsList;
     }
 
-    public static int getTotalTransactions() throws SQLException {
-        String query = "SELECT COUNT(*) AS total FROM transaction_table";
-        try (Connection conn = getConnection();
+    public static int fetchTotalTransactionCount() throws SQLException {
+        String sqlQuery = "SELECT COUNT(*) AS total_transactions FROM transaction_table";
+        try (Connection conn = connectToDatabase();
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(query)) {
-            if (rs.next()) {
-                return rs.getInt("total");
+             ResultSet resultSet = stmt.executeQuery(sqlQuery)) {
+            if (resultSet.next()) {
+                return resultSet.getInt("total_transactions");
             }
         }
         return 0;
